@@ -17,14 +17,15 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
-function makeBoard(WIDTH, HEIGHT) {
+function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
-  for (let row = 0; row < WIDTH.length; row++) {
-    for (let col = 0; col < HEIGHT.length; col++) {
-      board[row][col] = null;
+  for (let y = 0; y < HEIGHT; y++) {
+    const innerArray = [];
+    for (let x = 0; x < WIDTH; x++) {
+      innerArray.push(null);
     }
+    board.push(innerArray);
   }
-  return board;
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
@@ -51,18 +52,18 @@ function makeHtmlBoard() {
   // uses WIDTH to create table cells for each row
   for (var y = 0; y < HEIGHT; y++) {
     // TODO: Create a table row element and assign to a "row" variable
-    let tableRow = document.getElementById('cyx');
+    let tableRow = document.createElement('tr');
     for (var x = 0; x < WIDTH; x++) {
       // TODO: Create a table cell element and assign to a "cell" variable
-      let tableCell = document.getElementById('cyx');
+      let tableCell = document.createElement('td');
       // TODO: add an id, c-y-x, to the above table cell element
+      tableCell.setAttribute("id", "c-y-x");
       // you'll use this later, so make sure you use c-y-x
       // TODO: append the table cell to the table row
       tableRow.append(tableCell);
     }
     // TODO: append the row to the html board
     htmlBoard.append(tableRow);
-
   }
 }
 
