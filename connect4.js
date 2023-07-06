@@ -7,11 +7,11 @@
  * board fills (tie)
  */
 
-var WIDTH = 7;
-var HEIGHT = 6;
+const WIDTH = 7;
+const HEIGHT = 6;
 
-var currPlayer = 1; // active player: 1 or 2
-var board = []; // array of rows, each row is array of cells  (board[y][x])
+let currPlayer = 1; // active player: 1 or 2
+const board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -29,17 +29,18 @@ function makeBoard() {
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
-
+// TODO: Rename var to let/const
 function makeHtmlBoard() {
-  var htmlBoard = document.getElementById('board');
+  let htmlBoard = document.getElementById('board');
 
   // TODO: add comment for this code
   // create a top row which accepts a click to add checker
-  var top = document.createElement("tr");
+  let top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
   // TODO: add comment for this code
+  // create a row for the top of the board each with a cell to click and add checker
   for (var x = 0; x < WIDTH; x++) {
     var headCell = document.createElement("td");
     headCell.setAttribute("id", `top-${x}`);
@@ -57,7 +58,7 @@ function makeHtmlBoard() {
       // TODO: Create a table cell element and assign to a "cell" variable
       let tableCell = document.createElement('td');
       // TODO: add an id, c-y-x, to the above table cell element
-      tableCell.setAttribute("id", "c-y-x");
+      tableCell.setAttribute("id", `c-${y}-${x}`);
       // you'll use this later, so make sure you use c-y-x
       // TODO: append the table cell to the table row
       tableRow.append(tableCell);
@@ -78,6 +79,13 @@ function findSpotForCol(x) {
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+  let checker = document.createElement('div');
+  // checker.setAttribute('piece', ".piece-p1");
+  // checker.setAttribute('player', player1 || player2);
+  checker.classList.add('piece');
+  checker.classList.add(`p${currPlayer}`);
+  let targetCell = document.getElementById(`c-${y}-${x}`);
+  targetCell.append(checker);
 }
 
 /** endGame: announce game end */
